@@ -10,10 +10,6 @@ const todoSchema = new Schema({
         require: true,
         default: false
     },
-    date:{
-        type: Date,
-        require: true
-    }
 })
 
-module.exports = mongoose.model('Todo', todeSchema)
+module.exports = mongoose.model('Todo', todoSchema)
