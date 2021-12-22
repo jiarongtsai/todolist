@@ -1,1 +1,9 @@
-<h2>the page is rendered by handlebars</h2>
+<h1>Todo list</h1>
+
+<ul>
+  {{#each todos}}
+    <li style="list-style-type: none;">
+        {{this.name}}
+    </li>
+  {{/each}}
+</ul>
