@@ -51,6 +51,8 @@ app.get('/todos', (req, res)=>{
     )
 })
 
+
+//new todo feature
 app.get('/todos/new', (req, res) =>{
     res.render('new')
 })
@@ -61,6 +63,16 @@ app.post('/todos', (req, res)=>{
     return Todo.create({name})
         .then(()=> res.redirect('/todos'))
         .catch(e =>{ console.error(e)})
+})
+
+//view certain todo
+app.get('/todos/:id', (req, res)=>{
+    const id = req.params.id
+    return Todo.findById(id)
+      .lean()
+      .then((todo) => res.render('detail', { todo }))
+      .catch(error => console.log(error))
+ 
 })
 
 app.listen(3000, ()=>{

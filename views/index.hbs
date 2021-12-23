@@ -5,6 +5,7 @@
   {{#each todos}}
     <li style="list-style-type: none;">
         {{this.name}}
+        <a href="./todos/{{ this._id }}">detail</a>
     </li>
   {{/each}}
 </ul>
