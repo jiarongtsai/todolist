@@ -29,14 +29,19 @@ db.once('open', () => {
 //     console.log(err)
 // })
 
+
 app.engine('hbs', exphbs.engine({ defaultLayout: 'main', extname: '.hbs' }))
 app.set('view engine', 'hbs')
+
+//讓req.body 的資料能被使用
+app.use(express.urlencoded({extended: true}))
+
 
 app.get('/', (req, res)=>{
     res.render('intro')
 })
 
-app.get('/todo', (req, res)=>{
+app.get('/todos', (req, res)=>{
     Todo.find() //取出資料
     .lean() //Mongoose model to JS object
     .then(
@@ -44,6 +49,18 @@ app.get('/todo', (req, res)=>{
     ).catch(
         e => console.error(e)
     )
+})
+
+app.get('/todos/new', (req, res) =>{
+    res.render('new')
+})
+
+app.post('/todos', (req, res)=>{
+    const name = req.body.name
+    console.log(name)
+    return Todo.create({name})
+        .then(()=> res.redirect('/todos'))
+        .catch(e =>{ console.error(e)})
 })
 
 app.listen(3000, ()=>{
