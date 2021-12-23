@@ -36,6 +36,8 @@ app.set('view engine', 'hbs')
 //讓req.body 的資料能被使用
 app.use(express.urlencoded({extended: true}))
 
+//CSS
+app.use(express.static('public'))
 
 app.get('/', (req, res)=>{
     res.render('intro')
